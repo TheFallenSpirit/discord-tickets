@@ -517,7 +517,7 @@ module.exports = class TicketManager {
 			);
 		}
 
-		const pings = category.pingRoles.map(r => `<@&${r}>`).join(' ');
+		const pings = category.pingRoles.map(r => `<@&${r}>`).join(', ');
 		const sent = await channel.send({
 			components: components.components.length >= 1 ? [components] : [],
 			content: getMessage('ticket.opening_message.content', {

@@ -426,9 +426,7 @@ ticket:
       take longer than usual to get a response.
     title: 😴 We're not online
   opening_message:
-    content: |
-      {staff}
-      {creator} has created a new ticket
+    content: "{creator} | {staff}"
     fields:
       topic: Topic
   references_message:
