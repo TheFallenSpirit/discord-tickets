@@ -495,7 +495,6 @@ module.exports = class TicketManager {
 				new ButtonBuilder()
 					.setCustomId(JSON.stringify({ action: 'edit' }))
 					.setStyle(ButtonStyle.Secondary)
-					.setEmoji(getMessage('buttons.edit.emoji'))
 					.setLabel(getMessage('buttons.edit.text')),
 			);
 		}
@@ -505,7 +504,6 @@ module.exports = class TicketManager {
 				new ButtonBuilder()
 					.setCustomId(JSON.stringify({ action: 'claim' }))
 					.setStyle(ButtonStyle.Secondary)
-					.setEmoji(getMessage('buttons.claim.emoji'))
 					.setLabel(getMessage('buttons.claim.text')),
 			);
 		}
@@ -515,7 +513,6 @@ module.exports = class TicketManager {
 				new ButtonBuilder()
 					.setCustomId(JSON.stringify({ action: 'close' }))
 					.setStyle(ButtonStyle.Danger)
-					.setEmoji(getMessage('buttons.close.emoji'))
 					.setLabel(getMessage('buttons.close.text')),
 			);
 		}
@@ -636,15 +633,7 @@ module.exports = class TicketManager {
 
 		await interaction.editReply({
 			components: [],
-			embeds: [
-				new ExtendedEmbedBuilder({
-					iconURL: guild.iconURL(),
-					text: category.guild.footer,
-				})
-					.setColor(category.guild.successColour)
-					.setTitle(getMessage('ticket.created.title'))
-					.setDescription(getMessage('ticket.created.description', { channel: channel.toString() })),
-			],
+			content: getMessage('ticket.created.description', { channel: channel.toString() })
 		});
 
 		try {
@@ -1101,7 +1090,6 @@ module.exports = class TicketManager {
 								...closeButtonId,
 							}))
 							.setStyle(ButtonStyle.Success)
-							.setEmoji(getMessage('buttons.accept_close_request.emoji'))
 							.setLabel(getMessage('buttons.accept_close_request.text')),
 						new ButtonBuilder()
 							.setCustomId(JSON.stringify({
@@ -1109,7 +1097,6 @@ module.exports = class TicketManager {
 								...closeButtonId,
 							}))
 							.setStyle(ButtonStyle.Danger)
-							.setEmoji(getMessage('buttons.reject_close_request.emoji'))
 							.setLabel(getMessage('buttons.reject_close_request.text')),
 					),
 			],
@@ -1140,17 +1127,7 @@ module.exports = class TicketManager {
 	async acceptClose(interaction) {
 		const ticket = await this.getTicket(interaction.channel.id);
 		const getMessage = this.client.i18n.getLocale(ticket.guild.locale);
-		await interaction.editReply({
-			embeds: [
-				new ExtendedEmbedBuilder({
-					iconURL: interaction.guild.iconURL(),
-					text: ticket.guild.footer,
-				})
-					.setColor(ticket.guild.successColour)
-					.setTitle(getMessage('ticket.close.closed.title'))
-					.setDescription(getMessage('ticket.close.closed.description')),
-			],
-		});
+		await interaction.editReply({ content: getMessage('ticket.close.closed.description') });
 		await new Promise(resolve => setTimeout(resolve, 5000));
 		await this.finallyClose(interaction.channel.id, this.$stale.get(interaction.channel.id) || {});
 	}
@@ -1283,7 +1260,6 @@ module.exports = class TicketManager {
 						value: `<@${ticket.closedById}>`,
 					});
 				}
-
 
 				if (reason) {
 					embed.addFields({

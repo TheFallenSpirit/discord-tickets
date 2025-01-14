@@ -30,22 +30,6 @@ buttons:
     emoji: 📄
     text: Transcript
 commands:
-  message:
-    create:
-      name: Create ticket from message
-    pin:
-      name: Pin message
-      not_pinnable:
-        description: |
-          This message can't be pinned.
-          Please ask an administrator to check the bot's permissions.
-        title: ❌ Error
-      not_ticket:
-        description: You can only pin messages in tickets.
-        title: ❌ This isn't a ticket channel
-      pinned:
-        description: The message has been pinned.
-        title: ✅ Pinned message
   slash:
     add:
       added: ➡️ {added} has been added by {by}.
@@ -250,18 +234,6 @@ commands:
           name: member
       transferred: 📨 {user} has transferred this ticket to {to}.
       transferred_from: 📨 {user} has transferred this ticket from {from} to {to}.
-  user:
-    create:
-      name: Create ticket for user
-      not_staff:
-        description: Only staff members can open tickets for other members.
-        title: ❌ Error
-      prompt:
-        description: Click the button below to create a ticket.
-        title: Please create a ticket
-      sent:
-        description: "{user} has been invited to create a ticket in **{category}**."
-        title: ✅ Prompt sent
 dm:
   closed:
     archived: Use the `/transcript` command in **{guild}** to view the archived messages.
@@ -323,9 +295,9 @@ log:
       update: updated
 menus:
   category:
-    placeholder: Select a ticket category
+    placeholder: Select a category to create a ticket.
   guild:
-    placeholder: Select a server
+    placeholder: Select a server to create a ticket.
 misc:
   blocked:
     description: You are not allowed to create tickets.
@@ -413,10 +385,10 @@ ticket:
   claimed: 🙌 {user} has claimed this ticket.
   close:
     closed:
-      description: This channel will be deleted in a few seconds…
+      description: ✅ This channel will be deleted in a few seconds...
       title: ✅ Ticket closed
     forbidden:
-      description: You don't have permission to close this ticket.
+      description: ❌ You don't have permission to close this ticket.
       title: ❌ Error
     rejected: ✋ {user} rejected a request to close this ticket.
     staff_request:
@@ -437,7 +409,7 @@ ticket:
       Send a message to cancel this automation.
     title: ⌛ This ticket will be closed soon
   created:
-    description: "Your ticket channel has been created: {channel}."
+    description: "✅ Your ticket has been created in {channel}."
     title: ✅ Ticket created
   edited:
     description: Your changes have been saved.
