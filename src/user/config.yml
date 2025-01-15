@@ -24,7 +24,7 @@ presence:
   activities:
     - name: "over ES Community"
       type: 3
-  interval: 20
+  interval: 120
   status: online
 stats: true
 templates:
