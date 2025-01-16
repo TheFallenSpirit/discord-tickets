@@ -1075,7 +1075,8 @@ module.exports = class TicketManager {
 			],
 			content: `${ticket.category.pingRoles.map(r => `<@&${r}>`).join(', ')}, ${getMessage('ticket.close.user_request.title', {
 				requestedBy: interaction.member.displayName
-			})}`
+			})}`,
+			allowedMentions: { roles: ticket.category.pingRoles }
 		});
 
 		this.$stale.set(ticket.id, {

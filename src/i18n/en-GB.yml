@@ -396,7 +396,9 @@ ticket:
         Click "Accept" to close it now, or "Reject" if you still need help.
       title: ❓ Can this ticket be closed?
     user_request:
-      title: "{requestedBy} wants to close this ticket."
+      title: |
+        ## {requestedBy} would like to close this ticket.\n
+        This ticket will be closed immediately, and a transcript will be created.
     wait_for_staff: ✋ Please wait for staff to close this ticket.
     wait_for_user: ✋ Please wait for the user to respond.
   closing_soon:
