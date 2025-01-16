@@ -60,15 +60,7 @@ module.exports = class CloseButton extends Button {
 					try {
 						await interaction.update({
 							components: [],
-							embeds: [
-								new ExtendedEmbedBuilder({
-									iconURL: interaction.guild.iconURL(),
-									text: ticket.guild.footer,
-								})
-									.setColor(ticket.guild.errorColour)
-									.setDescription(getMessage('ticket.close.rejected', { user: interaction.user.toString() }))
-									.setFooter({ text: null }),
-							],
+							content: getMessage('ticket.close.rejected', { user: interaction.user.toString() })
 						});
 
 					} finally { // this should run regardless of whatever happens above

@@ -386,7 +386,7 @@ ticket:
     forbidden:
       description: ❌ You don't have permission to close this ticket.
       title: ❌ Error
-    rejected: ✋ {user} rejected a request to close this ticket.
+    rejected: ❌ {user} rejected the request to close this ticket.
     staff_request:
       archived: |
 
@@ -397,7 +397,7 @@ ticket:
       title: ❓ Can this ticket be closed?
     user_request:
       title: |
-        ## {requestedBy} would like to close this ticket.\n
+        ## {staff}, {requestedBy} would like to close this ticket.
         This ticket will be closed immediately, and a transcript will be created.
     wait_for_staff: ✋ Please wait for staff to close this ticket.
     wait_for_user: ✋ Please wait for the user to respond.
