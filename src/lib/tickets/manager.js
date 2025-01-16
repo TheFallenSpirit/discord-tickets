@@ -509,6 +509,7 @@ module.exports = class TicketManager {
 				staff: pings ? pings + ',' : '',
 			}),
 			embeds,
+			allowedMentions: { roles: category.pingRoles }
 		});
 		await sent.pin({ reason: 'Ticket opening message' });
 		const pinned = channel.messages.cache.last();
