@@ -1073,7 +1073,7 @@ module.exports = class TicketManager {
 							.setLabel(getMessage('buttons.reject_close_request.text')),
 					),
 			],
-			content: `${ticket.category.pingRoles.map(r => `<@&${r}>`).join(', ')}, ${getMessage('ticket.close.user_request.title', {
+			content: `${ticket.category.pingRoles.map(r => `<@&${r}>`).join(', ')}\n${getMessage('ticket.close.user_request.title', {
 				requestedBy: interaction.member.displayName
 			})}`,
 			allowedMentions: { roles: ticket.category.pingRoles }
