@@ -60,7 +60,7 @@ module.exports = class CloseButton extends Button {
 					try {
 						await interaction.update({
 							components: [],
-							content: getMessage('ticket.close.rejected', { user: interaction.user.toString() })
+							content: getMessage('ticket.close.rejected', { user: interaction.member.displayName })
 						});
 
 					} finally { // this should run regardless of whatever happens above

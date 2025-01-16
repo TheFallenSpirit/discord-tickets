@@ -1046,7 +1046,12 @@ module.exports = class TicketManager {
 		const ticket = await this.getTicket(interaction.channel.id);
 		const getMessage = this.client.i18n.getLocale(ticket.guild.locale);
 		const staff = interaction.user.id !== ticket.createdById && await isStaff(interaction.guild, interaction.user.id);
-		if (staff) return this.finallyClose(interaction.channel.id, { closedBy: interaction.user.id, reason });
+
+		if (staff) {
+			await interaction.editReply({ content: getMessage('ticket.close.closed.description') });
+			await new Promise(resolve => setTimeout(resolve, 5000));
+			return this.finallyClose(interaction.channel.id, { closedBy: interaction.user.id, reason })
+		};
 
 		const closeButtonId = {
 			action: 'close',
