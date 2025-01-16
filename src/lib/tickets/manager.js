@@ -210,16 +210,8 @@ module.exports = class TicketManager {
 		}
 
 		const sendError = name => interaction.reply({
-			embeds: [
-				new ExtendedEmbedBuilder({
-					iconURL: guild.iconURL(),
-					text: category.guild.footer,
-				})
-					.setColor(category.guild.errorColour)
-					.setTitle(getMessage(`misc.${name}.title`))
-					.setDescription(getMessage(`misc.${name}.description`)),
-			],
-			ephemeral: true,
+			content: getMessage(`misc.${name}.description`),
+			ephemeral: true
 		});
 
 		if (category.guild.blocklist.length !== 0) {
@@ -257,16 +249,8 @@ module.exports = class TicketManager {
 		const cooldown = await this.getCooldown(category.id, interaction.user.id);
 		if (cooldown) {
 			return await interaction.reply({
-				embeds: [
-					new ExtendedEmbedBuilder({
-						iconURL: guild.iconURL(),
-						text: category.guild.footer,
-					})
-						.setColor(category.guild.errorColour)
-						.setTitle(getMessage('misc.cooldown.title'))
-						.setDescription(getMessage('misc.cooldown.description', { time: ms(cooldown - Date.now()) })),
-				],
-				ephemeral: true,
+				content: getMessage('misc.cooldown.description', { time: ms(cooldown - Date.now()) }),
+				ephemeral: true
 			});
 		}
 
@@ -1089,7 +1073,9 @@ module.exports = class TicketManager {
 							.setLabel(getMessage('buttons.reject_close_request.text')),
 					),
 			],
-			content: `${ticket.category.pingRoles.map(r => `<@&${r}>`).join(', ')} | ${getMessage('ticket.user_request.title')}`
+			content: `${ticket.category.pingRoles.map(r => `<@&${r}>`).join(', ')}, ${getMessage('ticket.close.user_request.title', {
+				requestedBy: interaction.member.displayName
+			})}`
 		});
 
 		this.$stale.set(ticket.id, {
