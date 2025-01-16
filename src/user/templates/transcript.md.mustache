@@ -14,10 +14,8 @@
 {{ #ticket.archivedUsers }}
   * {{ displayName }} ({{ username }}) [{{ userId }}]
 {{ /ticket.archivedUsers }}
-
-* Pinned Messages: {{ #pinned }}{{ . }}{{ /pinned }}
 ---
 
 {{ #ticket.archivedMessages }}
-<{{ number }}> [{{ createdAtTimestamp }}] {{author.displayName}} ({{ author.username }}): {{ text }}
+[{{ createdAtTimestamp }}] {{author.displayName}} ({{ author.username }}): {{ text }}
 {{ /ticket.archivedMessages }}

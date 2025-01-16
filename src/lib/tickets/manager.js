@@ -1062,23 +1062,12 @@ module.exports = class TicketManager {
 		const ticket = await this.getTicket(interaction.channel.id);
 		const getMessage = this.client.i18n.getLocale(ticket.guild.locale);
 		const staff = interaction.user.id !== ticket.createdById && await isStaff(interaction.guild, interaction.user.id);
+		if (staff) return this.finallyClose(interaction.channel.id, { closedBy: interaction.user.id, reason });
+
 		const closeButtonId = {
 			action: 'close',
 			expect: staff ? 'user' : 'staff',
 		};
-		const embed = new ExtendedEmbedBuilder(/* {
-			iconURL: interaction.guild.iconURL(),
-			text: ticket.guild.footer,
-		} */)
-			.setColor(ticket.guild.primaryColour)
-			.setTitle(getMessage(`ticket.close.${staff ? 'staff' : 'user'}_request.title`, { requestedBy: interaction.member.displayName }));
-
-		if (staff) {
-			embed.setDescription(
-				getMessage('ticket.close.staff_request.description', { requestedBy: interaction.user.toString() }) +
-				(ticket.guild.archive ? getMessage('ticket.close.staff_request.archived') : ''),
-			);
-		}
 
 		const sent = await interaction.editReply({
 			components: [
@@ -1100,8 +1089,7 @@ module.exports = class TicketManager {
 							.setLabel(getMessage('buttons.reject_close_request.text')),
 					),
 			],
-			content: staff ? `<@${ticket.createdById}>` : '', // ticket.category.pingRoles.map(r => `<@&${r}>`).join(' ')
-			embeds: [embed],
+			content: `${ticket.category.pingRoles.map(r => `<@&${r}>`).join(', ')} | ${getMessage('ticket.user_request.title')}`
 		});
 
 		this.$stale.set(ticket.id, {
