@@ -53,15 +53,7 @@ module.exports = class RemoveSlashCommand extends SlashCommand {
 			const settings = await client.prisma.guild.findUnique({ where: { id: interaction.guild.id } });
 			const getMessage = client.i18n.getLocale(settings.locale);
 			return await interaction.editReply({
-				embeds: [
-					new ExtendedEmbedBuilder({
-						iconURL: interaction.guild.iconURL(),
-						text: settings.footer,
-					})
-						.setColor(settings.errorColour)
-						.setTitle(getMessage('misc.invalid_ticket.title'))
-						.setDescription(getMessage('misc.invalid_ticket.description')),
-				],
+				content: getMessage('misc.invalid_ticket.description')
 			});
 		}
 
@@ -73,15 +65,7 @@ module.exports = class RemoveSlashCommand extends SlashCommand {
 			!(await isStaff(interaction.guild, interaction.member.id))
 		) {
 			return await interaction.editReply({
-				embeds: [
-					new ExtendedEmbedBuilder({
-						iconURL: interaction.guild.iconURL(),
-						text: ticket.guild.footer,
-					})
-						.setColor(ticket.guild.errorColour)
-						.setTitle(getMessage('commands.slash.remove.not_staff.title'))
-						.setDescription(getMessage('commands.slash.remove.not_staff.description')),
-				],
+				content: getMessage('commands.slash.add.not_staff.description')
 			});
 		}
 
@@ -102,29 +86,17 @@ module.exports = class RemoveSlashCommand extends SlashCommand {
 		await ticketChannel.permissionOverwrites.delete(member, `${interaction.user.tag} removed ${member.user.tag} from the ticket`);
 
 		await ticketChannel.send({
-			embeds: [
-				new ExtendedEmbedBuilder()
-					.setColor(ticket.guild.primaryColour)
-					.setDescription(getMessage('commands.slash.remove.removed', {
-						by: interaction.member.toString(),
-						removed: member.toString(),
-					})),
-			],
+			content: getMessage('commands.slash.remove.removed', {
+				removed: member.toString(),
+				by: interaction.member.displayName
+			})
 		});
 
 		await interaction.editReply({
-			embeds: [
-				new ExtendedEmbedBuilder({
-					iconURL: interaction.guild.iconURL(),
-					text: ticket.guild.footer,
-				})
-					.setColor(ticket.guild.successColour)
-					.setTitle(getMessage('commands.slash.remove.success.title'))
-					.setDescription(getMessage('commands.slash.remove.success.description', {
-						member: member.toString(),
-						ticket: ticketChannel.toString(),
-					})),
-			],
+			content: getMessage('commands.slash.remove.success.description', {
+				member: member.displayName,
+				ticket: ticketChannel.toString()
+			})
 		});
 
 		logTicketEvent(this.client, {

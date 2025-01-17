@@ -32,11 +32,11 @@ buttons:
 commands:
   slash:
     add:
-      added: ➡️ {added} has been added by {by}.
+      added: ➕ {added} has been added to this ticket by {by}.
       description: Add a member to a ticket
       name: add
       not_staff:
-        description: Only staff members can add members to others' tickets.
+        description: ❌ Only staff members can add members to others' tickets.
         title: ❌ Error
       options:
         member:
@@ -46,7 +46,7 @@ commands:
           description: The ticket to add the member to
           name: ticket
       success:
-        description: "{member} has been added to {ticket}."
+        description: "✅ {member} has been added to {ticket}."
         title: ✅ Added
     claim:
       description: Claim a ticket
@@ -170,9 +170,9 @@ commands:
         ticket:
           description: The ticket to remove the member from
           name: ticket
-      removed: ⬅️ {removed} has been removed by {by}.
+      removed: ➖ {removed} has been removed from this ticket by {by}.
       success:
-        description: "{member} has been removed from {ticket}."
+        description: "✅ {member} has been removed from {ticket}."
         title: ✅ Removed
     tag:
       description: Use a tag
@@ -320,7 +320,7 @@ misc:
     title: ⏰ Expired
   expires_in: Expires in {time}
   invalid_ticket:
-    description: Please specify a valid ticket.
+    description: ❌ This is not a valid ticket channel.
     title: ❌ Invalid ticket
   member_limit:
     description:
@@ -410,7 +410,7 @@ ticket:
     description: "✅ Your ticket has been created in {channel}."
     title: ✅ Ticket created
   edited:
-    description: Your changes have been saved.
+    description: ✅ Your ticket information has been updated.
     title: ✅ Ticket updated
   feedback: Thank you for your feedback.
   inactive:

@@ -89,15 +89,7 @@ module.exports = class QuestionsModal extends Modal {
 			}
 
 			await interaction.editReply({
-				embeds: [
-					new ExtendedEmbedBuilder({
-						iconURL: interaction.guild.iconURL(),
-						text: ticket.guild.footer,
-					})
-						.setColor(ticket.guild.successColour)
-						.setTitle(getMessage('ticket.edited.title'))
-						.setDescription(getMessage('ticket.edited.description')),
-				],
+				content: getMessage('ticket.edited.description')
 			});
 
 			/** @param {ticket} ticket */
