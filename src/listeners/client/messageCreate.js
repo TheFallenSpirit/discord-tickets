@@ -189,7 +189,7 @@ module.exports = class extends Listener {
 				// archive messages
 				if (settings.archive) {
 					try {
-						await client.tickets.archiver.saveMessage(ticket.id, message);
+						await client.tickets.archiver.saveMessage(message.channel.id, message);
 					} catch (error) {
 						client.log.warn('Failed to archive message', message.id);
 						client.log.error(error);
