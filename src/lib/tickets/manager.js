@@ -385,7 +385,7 @@ module.exports = class TicketManager {
 					id: guild.roles.everyone.id,
 				},
 				{
-					allow,
+					allow: [...allow, 'MentionEveryone'],
 					id: this.client.user.id,
 				},
 				{
@@ -508,8 +508,7 @@ module.exports = class TicketManager {
 				creator: interaction.user.toString(),
 				staff: pings ? pings + ',' : '',
 			}),
-			embeds,
-			allowedMentions: { roles: category.pingRoles, users: [interaction.user.id] }
+			embeds
 		});
 		
 		await sent.pin({ reason: 'Ticket opening message' });
